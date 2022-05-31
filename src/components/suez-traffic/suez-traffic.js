@@ -60,7 +60,8 @@ export default function SuezTraffic() {
     return () => clearInterval(interval);
   }, []);
 
-  const generateLoad = () =>
+  const generateLoad = React.useMemo(
+    () => 
     load.reduce(
       (acc, reducer, position) => [
         ...acc,
@@ -70,9 +71,9 @@ export default function SuezTraffic() {
         }
       ],
       []
-    );
+    ),[load])
 
-  const renderTrafficBar = generateLoad()
+  const renderTrafficBar = generateLoad //Фокус Ап!
     .map(element => `${element.color} ${element.value}%`)
     .join(', ');
 
